@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
             setLoading(true)
             const res = await fetch(API_URL + '/api/auth/check', {
                 credentials: 'include'
-            });
+            })
 
             const data = await res.json()
 

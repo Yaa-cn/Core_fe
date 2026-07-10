@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import heroBg from "../assets/images/heroBg.webp"
+import heroBg from "../assets/images/heroBg1.webp"
 
 function Hero() {
 
