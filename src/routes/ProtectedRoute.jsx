@@ -9,12 +9,18 @@ function ProtectedRoute({ children }) {
     const location = useLocation()
 
     if (loading) {
-        return <div className="grid h-screen place-content-center"><Loader /></div>
-    } else if (!user) {
+        return <div className="grid h-[70vh] place-content-center"><Loader /></div>
+    }
+
+    if (!user) {
         return <Navigate to="/login" state={{ from: location.pathname }} replace />
-    } else {
+    }
+    
+    if (user) {
         return children
     }
+
+    return <div className="grid h-[70vh] place-content-center"><Loader /></div>
 
 }
 export default ProtectedRoute

@@ -1,6 +1,6 @@
 import { useCart } from '../context/CartContext'
 import { Navigate, useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { RiCheckboxCircleFill } from '@remixicon/react'
 import { useAuth } from '../context/AuthContext'
 import { toast } from 'sonner'
@@ -21,6 +21,12 @@ function Checkout() {
     const API_URL = import.meta.env.VITE_API_URL
     const navigate = useNavigate()
 
+    const nameInput = useRef()
+    const phoneInput = useRef()
+    const addressInput = useRef()
+    const cityInput = useRef()
+    const districtInput = useRef()
+
     const payMethod = paymentMethod === 'cashOnDelivery' ? 'Cash On Delivery' : 'Card Payment'
 
     if (!loading && cart.length === 0) {
@@ -38,6 +44,12 @@ function Checkout() {
 
     const checkoutPayhere = async () => {
         try {
+
+            if (nameInput.current.value === '', phoneInput.current.value === '', addressInput.current.value === '', cityInput.current.value === '', districtInput.current.value === '') {
+                toast.info("Form fields cannot be empty !")
+                return
+            }
+
             const response = await fetch(`${API_URL}/api/checkout`, {
                 method: "POST",
                 headers: {
@@ -101,6 +113,12 @@ function Checkout() {
     }
 
     const handleCompleteOrder = () => {
+
+        if (nameInput.current.value === '', phoneInput.current.value === '', addressInput.current.value === '', cityInput.current.value === '', districtInput.current.value === '') {
+            toast.info("Form fields cannot be empty !")
+            return
+        }
+
         checkout({
             shippingAddress: checkoutAddress,
             paymentMethod: payMethod
@@ -131,27 +149,52 @@ function Checkout() {
 
                     <div className="flex flex-col gap-0.5">
                         <label htmlFor="name" className="text-[10px] uppercase text-neutral-500">Name</label>
-                        <input onChange={(e) => setCheckoutAddress(prev => ({ ...prev, name: e.target.value }))} required pattern='[A-Za-z\s]+' title="Please enter letters and spaces only" value={checkoutAddress?.name} type="text" name="name" id="name" placeholder="Name" className="text-xs text-primary/80 border border-secondary/20 rounded-[3px] px-4 py-3 outline-none " />
+                        <input
+                            onChange={(e) => setCheckoutAddress(prev => ({ ...prev, name: e.target.value }))}
+                            required
+                            pattern='[A-Za-z\s]+'
+                            title="Please enter letters and spaces only"
+                            ref={nameInput}
+                            value={checkoutAddress?.name} type="text" name="name" id="name" placeholder="Name" className="text-xs text-primary/80 border border-secondary/20 rounded-[3px] px-4 py-3 outline-none " />
                     </div>
 
                     <div className="flex flex-col gap-0.5">
                         <label htmlFor="phone" className="text-[10px] uppercase text-neutral-500">Phone Number</label>
-                        <input onChange={(e) => setCheckoutAddress(prev => ({ ...prev, phoneNo: e.target.value }))} required pattern="^\+?\d{7,15}$" title="Enter a valid phone number" value={checkoutAddress?.phoneNo} type="text" name="phone" id="phone" placeholder="Number" className="text-xs text-primary/80 border border-secondary/20 rounded-[3px] px-4 py-3 outline-none " />
+                        <input onChange={(e) => setCheckoutAddress(prev => ({ ...prev, phoneNo: e.target.value }))}
+                            required
+                            pattern="^\+?\d{7,15}$"
+                            title="Enter a valid phone number"
+                            ref={phoneInput}
+                            value={checkoutAddress?.phoneNo} type="text" name="phone" id="phone" placeholder="Number" className="text-xs text-primary/80 border border-secondary/20 rounded-[3px] px-4 py-3 outline-none " />
                     </div>
 
                     <div className="flex flex-col gap-0.5">
                         <label htmlFor="address" className="text-[10px] uppercase text-neutral-500">Address</label>
-                        <input onChange={(e) => setCheckoutAddress(prev => ({ ...prev, address: e.target.value }))} required value={checkoutAddress?.address} type="text" name="address" id="address" placeholder="Address" className="text-xs text-primary/80 border border-secondary/20 rounded-[3px] px-4 py-3 outline-none " />
+                        <input onChange={(e) => setCheckoutAddress(prev => ({ ...prev, address: e.target.value }))}
+                            required
+                            value={checkoutAddress?.address}
+                            ref={addressInput}
+                            type="text" name="address" id="address" placeholder="Address" className="text-xs text-primary/80 border border-secondary/20 rounded-[3px] px-4 py-3 outline-none " />
                     </div>
 
                     <div className="flex flex-col gap-0.5">
                         <label htmlFor="city" className="text-[10px] uppercase text-neutral-500">City</label>
-                        <input onChange={(e) => setCheckoutAddress(prev => ({ ...prev, city: e.target.value }))} required pattern='[A-Za-z\s]+' title="Please enter letters and spaces only" value={checkoutAddress?.city} type="text" name="city" id="city" placeholder="City" className="text-xs text-primary/80 border border-secondary/20 rounded-[3px] px-4 py-3 outline-none " />
+                        <input onChange={(e) => setCheckoutAddress(prev => ({ ...prev, city: e.target.value }))}
+                            required
+                            pattern='[A-Za-z\s]+'
+                            title="Please enter letters and spaces only"
+                            ref={cityInput}
+                            value={checkoutAddress?.city} type="text" name="city" id="city" placeholder="City" className="text-xs text-primary/80 border border-secondary/20 rounded-[3px] px-4 py-3 outline-none " />
                     </div>
 
                     <div className="flex flex-col gap-0.5">
                         <label htmlFor="district" className="text-[10px] uppercase text-neutral-500">District</label>
-                        <input onChange={(e) => setCheckoutAddress(prev => ({ ...prev, district: e.target.value }))} required pattern='[A-Za-z\s]+' title="Please enter letters and spaces only" value={checkoutAddress?.district} type="text" name="district" id="district" placeholder="District" className="text-xs text-primary/80 border border-secondary/20 rounded-[3px] px-4 py-3 outline-none " />
+                        <input onChange={(e) => setCheckoutAddress(prev => ({ ...prev, district: e.target.value }))}
+                            required
+                            pattern='[A-Za-z\s]+'
+                            title="Please enter letters and spaces only"
+                            ref={districtInput}
+                            value={checkoutAddress?.district} type="text" name="district" id="district" placeholder="District" className="text-xs text-primary/80 border border-secondary/20 rounded-[3px] px-4 py-3 outline-none " />
                     </div>
                 </form>
 
