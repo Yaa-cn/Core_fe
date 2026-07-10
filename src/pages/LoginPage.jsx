@@ -23,10 +23,6 @@ function LoginPage() {
         e.target.reset()
     }
 
-    if (loading) {
-        return <div className="grid h-screen place-content-center"><Loader /></div>
-    }
-
     return (
         <div className='flex flex-col sm:flex-row w-full'>
             <div style={{ backgroundImage: `url(${loginPic})` }} className='bg-cover bg-center h-40 sm:h-auto w-full sm:w-2/5 md:w-2/4 lg:w-4/7 xl:w-3/5' >

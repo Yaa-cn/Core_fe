@@ -15,12 +15,8 @@ function ProtectedRoute({ children }) {
     if (!user) {
         return <Navigate to="/login" state={{ from: location.pathname }} replace />
     }
-    
-    if (user) {
-        return children
-    }
 
-    return <div className="grid h-[70vh] place-content-center"><Loader /></div>
+    return children
 
 }
 export default ProtectedRoute

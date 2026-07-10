@@ -19,11 +19,11 @@ function Profile() {
 
       <div className="flex justify-between items-center gap-6 bg-accent border border-secondary/20 rounded-[3px] px-8 py-6 ">
         <div className="grid place-items-center uppercase bg-secondary text-white border border-secondary/20 rounded-full w-14 h-14 text-2xl font-bold">
-          <span>{user.name?.charAt(0)}</span>
+          <span>{user?.name?.charAt(0)}</span>
         </div>
         <div className="mr-auto">
-          <h1 className="text-xl font-extrabold text-primary">{capitalize(user.name)}</h1>
-          <p className="text-xs text-neutral-500">{capitalize(user.email)}</p>
+          <h1 className="text-xl font-extrabold text-primary">{capitalize(user?.name)}</h1>
+          <p className="text-xs text-neutral-500">{capitalize(user?.email)}</p>
         </div>
       </div>
 

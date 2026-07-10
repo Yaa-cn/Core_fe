@@ -234,9 +234,13 @@ export const OrdersProvider = ({ children }) => {
         credentials: 'include'
       })
       const data = await res.json()
-      setReviewStatus(data.status)
+
+      if (res.ok) {
+        setReviewStatus(data.status)
+      }
+
     } catch (err) {
-      console.log(err.message)
+      console.error(err.message)
     } finally {
       setReviewStatusLoading(false)
     }

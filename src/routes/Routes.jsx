@@ -28,9 +28,6 @@ const router = createBrowserRouter([
       <Suspense fallback={<div className='flex justify-center items-center h-dvh'><Loader /></div>} >
         <App />
       </Suspense>,
-
-    path: '/',
-    element: <App />,
     children: [
       {
         path: '/',
@@ -109,7 +106,7 @@ const router = createBrowserRouter([
 
 function Routes() {
   return (
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
   )
 }
 export default Routes
