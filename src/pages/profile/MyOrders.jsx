@@ -78,9 +78,9 @@ function OrderCard({ id, orderId, placedTime, items, total, payMethod }) {
             </div> */}
 
             <div className='flex'>
-                <img onClick={() => navigate(`/product/${item.product.slug}`)} className='aspect-square max-w-12 max-h-12 sm:max-w-20 sm:max-h-20 object-cover border border-secondary/25 rounded-[3px]' src={item.product.image} alt={`${item.product.slug}.jpg`} loading="lazy" />
+                <img onClick={() => navigate(`/product/${item.product.slug}`)} className='aspect-square max-w-16 max-h-16 sm:max-w-20 sm:max-h-20 object-cover border border-secondary/25 rounded-[3px]' src={item.product.image} alt={`${item.product.slug}.jpg`} loading="lazy" />
 
-                <div className='flex flex-col ml-0 sm:ml-3 w-full'>
+                <div className='flex flex-col ml-3 w-full'>
 
                     <div className='flex'>
                         <p onClick={() => navigate(`/product/${item.product.slug}`)} className="text-xs text-primary line-clamp-1 w-4/7 sm:w-3/5 select-none">{item.product.name}</p>
